@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arina Roth — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --coral: #FF6B6B;
+    --mint: #4ECDC4;
+    --gold: #FFE66D;
+    --navy: #1A1A2E;
+    --lavender: #C77DFF;
+    --bg: #F9F5F0;
+    --text: #1A1A2E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: .4;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 460px;
+    background: var(--bg);
+    clip-path: polygon(80px 0, 100% 0, 100% 100%, 0 100%);
+    z-index: 1;
+  }
+
+  .hero-left {
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--coral);
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 32px;
+    width: fit-content;
+    animation: fadeUp .6s ease both;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 5.5vw, 80px);
+    font-weight: 900;
+    line-height: 1.0;
+    color: white;
+    animation: fadeUp .6s .1s ease both;
+  }
+
+  .hero-name span { color: var(--gold); }
+
+  .hero-tagline {
+    margin-top: 28px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.65);
+    max-width: 420px;
+    animation: fadeUp .6s .2s ease both;
+  }
+
+  .hero-buttons {
+    margin-top: 40px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    animation: fadeUp .6s .3s ease both;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all .22s ease;
+    cursor: pointer;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-primary { background: var(--coral); color: white; }
+  .btn-primary:hover { background: #ff5252; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,107,0.4); }
+
+  .btn-outline { background: transparent; color: var(--mint); border: 1.5px solid var(--mint); }
+  .btn-outline:hover { background: var(--mint); color: var(--navy); transform: translateY(-2px); }
+
+  .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  .hero-right {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 48px 60px 80px;
+    gap: 20px;
+  }
+
+  /* ── HEADSHOT ── */
+  .headshot-wrap {
+    position: relative;
+    width: 220px;
+    height: 260px;
+  }
+
+  .headshot-bg {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--coral), var(--lavender));
+    transform: rotate(3deg);
+  }
+
+  .headshot-frame {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #e8e0d8;
+    border: 3px solid white;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+  }
+
+  .headshot-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .photo-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 10px; color: #aaa; font-size: 12px; text-align: center; padding: 20px;
+    background: linear-gradient(135deg, #f0ebe4, #e8e0d8);
+    line-height: 1.5;
+  }
+
+  .photo-placeholder svg { width: 34px; height: 34px; opacity: .35; }
+
+  .hero-location {
+    font-size: 13px; color: #777; text-align: center;
+    display: flex; align-items: center; gap: 5px;
+  }
+
+  /* ── BAND ── */
+  .band {
+    width: 100%; overflow: hidden;
+    background: var(--navy); padding: 18px 0; white-space: nowrap;
+  }
+
+  .band-inner {
+    display: inline-flex; gap: 48px;
+    animation: marquee 16s linear infinite;
+  }
+
+  .band-item {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500;
+    letter-spacing: 1.5px; color: var(--gold);
+    flex-shrink: 0; text-transform: uppercase;
+  }
+
+  .band-dot { color: var(--coral); }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── SECTIONS ── */
+  .section { padding: 100px 80px; max-width: 1200px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    font-weight: 500; color: var(--coral); margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 52px); font-weight: 700;
+    line-height: 1.15; margin-bottom: 56px;
+  }
+
+  /* ── EXPERIENCE ── */
+  .exp-grid { display: grid; gap: 24px; }
+
+  .exp-card {
+    display: grid; grid-template-columns: auto 1fr; gap: 0 28px;
+    padding: 28px 32px; background: white; border-radius: 16px;
+    border-left: 4px solid var(--coral);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+    transition: transform .25s, box-shadow .25s;
+    opacity: 0; transform: translateY(20px);
+  }
+
+  .exp-card.visible {
+    opacity: 1; transform: translateY(0);
+    transition: opacity .5s ease, transform .5s ease, box-shadow .25s;
+  }
+
+  .exp-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+  .exp-card:nth-child(2) { border-color: var(--mint); }
+  .exp-card:nth-child(3) { border-color: var(--lavender); }
+  .exp-card:nth-child(4) { border-color: #f0c040; }
+
+  .exp-period {
+    writing-mode: vertical-rl; font-size: 11px;
+    letter-spacing: 2px; text-transform: uppercase; color: #bbb; align-self: center;
+  }
+
+  .exp-company {
+    font-size: 13px; font-weight: 500; color: var(--coral);
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;
+  }
+
+  .exp-card:nth-child(2) .exp-company { color: var(--mint); }
+  .exp-card:nth-child(3) .exp-company { color: var(--lavender); }
+  .exp-card:nth-child(4) .exp-company { color: #c8a000; }
+
+  .exp-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700; margin-bottom: 12px;
+  }
+
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+
+  .exp-bullets li {
+    font-size: 14px; line-height: 1.6; color: #555;
+    padding-left: 16px; position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '→'; position: absolute; left: 0; color: var(--coral); font-size: 12px;
+  }
+
+  /* ── PHOTO STRIP ── */
+  .photo-strip {
+    background: white; padding: 56px 80px;
+    display: flex; gap: 24px; align-items: flex-end; overflow: hidden;
+  }
+
+  .strip-frame {
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.1); border: 3px solid white;
+    transition: transform .3s, box-shadow .3s; background: #e8e0d8; cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .strip-frame:hover { transform: translateY(-8px); box-shadow: 0 20px 48px rgba(0,0,0,0.14); }
+  .strip-frame:nth-child(1) { width: 300px; height: 340px; border-color: var(--coral); }
+  .strip-frame:nth-child(2) { width: 220px; height: 260px; border-color: var(--mint); margin-bottom: 40px; }
+  .strip-frame:nth-child(3) { width: 260px; height: 310px; border-color: var(--lavender); margin-bottom: 10px; }
+
+  .strip-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .strip-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 8px; color: #bbb; font-size: 12px; text-align: center; padding: 16px;
+    background: linear-gradient(135deg, #f0ebe4, #e8e0d8); line-height: 1.5;
+  }
+
+  .strip-placeholder svg { width: 28px; height: 28px; opacity: .35; }
+
+  /* ── SKILLS ── */
+  .skills-section { background: var(--navy); padding: 100px 80px; }
+  .skills-inner { max-width: 1200px; margin: 0 auto; }
+  .skills-section .section-label { color: var(--mint); }
+  .skills-section .section-title { color: white; }
+
+  .skills-cloud { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  .skill-tag {
+    padding: 10px 20px; border-radius: 100px; font-size: 14px;
+    border: 1.5px solid; transition: all .2s; cursor: default;
+    opacity: 0; transform: scale(.9);
+  }
+
+  .skill-tag.visible {
+    opacity: 1; transform: scale(1);
+    transition: opacity .4s ease, transform .4s ease, background .2s, color .2s;
+  }
+
+  .skill-tag:hover { transform: scale(1.06); }
+  .skill-tag.coral { color: var(--coral); border-color: var(--coral); }
+  .skill-tag.coral:hover { background: var(--coral); color: white; }
+  .skill-tag.mint { color: var(--mint); border-color: var(--mint); }
+  .skill-tag.mint:hover { background: var(--mint); color: var(--navy); }
+  .skill-tag.gold { color: var(--gold); border-color: var(--gold); }
+  .skill-tag.gold:hover { background: var(--gold); color: var(--navy); }
+  .skill-tag.lav { color: var(--lavender); border-color: var(--lavender); }
+  .skill-tag.lav:hover { background: var(--lavender); color: white; }
+
+  /* ── PHOTO + ABOUT ASIDE ── */
+  .photo-aside {
+    max-width: 1200px; margin: 0 auto;
+    padding: 80px 80px 40px;
+    display: flex; align-items: center; gap: 56px;
+  }
+
+  .aside-frame {
+    flex-shrink: 0; width: 240px; height: 290px;
+    border-radius: 20px; overflow: hidden;
+    background: #e8e0d8;
+    border: 3px solid #f0c040;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.1);
+    transform: rotate(-2deg);
+    transition: transform .3s;
+  }
+
+  .aside-frame:hover { transform: rotate(0deg) scale(1.02); }
+  .aside-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+  .aside-text { font-size: 15px; line-height: 1.75; color: #555; }
+  .aside-text strong { color: var(--text); font-weight: 600; }
+
+  /* ── EDUCATION ── */
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  .edu-card {
+    padding: 32px; border-radius: 16px;
+    opacity: 0; transform: translateY(20px);
+  }
+
+  .edu-card.visible {
+    opacity: 1; transform: translateY(0);
+    transition: opacity .5s ease, transform .5s ease;
+  }
+
+  .edu-card.c1 { background: #fff5f5; border: 2px solid var(--coral); }
+  .edu-card.c2 { background: #f0fffe; border: 2px solid var(--mint); }
+  .edu-card.c3 { background: #faf5ff; border: 2px solid var(--lavender); grid-column: span 2; }
+
+  .edu-year {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 500; margin-bottom: 8px; color: var(--coral);
+  }
+
+  .edu-card.c2 .edu-year { color: var(--mint); }
+  .edu-card.c3 .edu-year { color: var(--lavender); }
+
+  .edu-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px; font-weight: 700; color: var(--text);
+    margin-bottom: 6px; line-height: 1.3;
+  }
+
+  .edu-school { font-size: 13px; color: #777; margin-bottom: 12px; }
+
+  .edu-grade {
+    display: inline-block; padding: 4px 12px; border-radius: 100px;
+    font-size: 12px; font-weight: 500; background: var(--coral); color: white;
+  }
+
+  .edu-card.c2 .edu-grade { background: var(--mint); color: var(--navy); }
+  .edu-card.c3 .edu-grade { background: var(--lavender); }
+
+  .cert-bullets { margin-top: 14px; list-style: none; display: flex; flex-direction: column; gap: 5px; }
+
+  .cert-bullets li {
+    font-size: 13px; color: #555;
+    padding-left: 14px; position: relative; line-height: 1.5;
+  }
+
+  .cert-bullets li::before {
+    content: '✦'; position: absolute; left: 0; font-size: 8px; top: 4px; color: var(--lavender);
+  }
+
+  /* ── LANGUAGES & EXTRAS ── */
+  .extras-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+
+  .lang-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+
+  .lang-item {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 15px; padding-bottom: 14px; border-bottom: 1px solid #e8e0d8;
+  }
+
+  .lang-level { display: flex; gap: 5px; }
+  .lang-dot { width: 10px; height: 10px; border-radius: 50%; background: #ddd; }
+  .lang-dot.filled { background: var(--coral); }
+
+  .vol-card {
+    padding: 24px; background: white; border-radius: 12px;
+    margin-bottom: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    border-top: 3px solid var(--mint);
+  }
+
+  .vol-card:last-child { border-color: var(--lavender); margin-bottom: 0; }
+
+  .vol-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .vol-period { font-size: 12px; color: #999; margin-bottom: 10px; }
+  .vol-desc { font-size: 13px; color: #666; line-height: 1.6; }
+
+  footer {
+    background: var(--navy); color: rgba(255,255,255,0.4);
+    text-align: center; padding: 40px; font-size: 13px;
+  }
+  footer span { color: var(--coral); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero::after { display: none; }
+    .hero-left { padding: 60px 32px; }
+    .hero-right { padding: 40px 32px; }
+    .section { padding: 60px 24px; }
+    .skills-section { padding: 60px 24px; }
+    .photo-strip { padding: 40px 24px; flex-wrap: wrap; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .edu-card.c3 { grid-column: span 1; }
+    .extras-grid { grid-template-columns: 1fr; }
+    .photo-aside { flex-direction: column; padding: 60px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Portfolio 2025</div>
+    <h1 class="hero-name">Arina<br><span>Roth.</span></h1>
+    <p class="hero-tagline">
+      Ich kombiniere fundierte Informatikkenntnisse mit strategischem Denken und unternehmerischer Praxis — und suche Herausforderungen, in denen ich Verantwortung übernehmen und aktiv gestalten kann.
+    </p>
+    <div class="hero-buttons">
+      <a href="mailto:arinaroth@gmail.com" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        arinaroth@gmail.com
+      </a>
+      <a href="https://linkedin.com/in/arina-roth" target="_blank" class="btn btn-outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="headshot-wrap">
+      <div class="headshot-bg"></div>
+      <div class="headshot-frame">
+        <!-- Replace this block with: <img src="dein-headshot.jpg" alt="Arina Roth"> -->
+        <div class="photo-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          Dein Headshot<br><small>src="headshot.jpg"</small>
+        </div>
+      </div>
+    </div>
+    <p class="hero-location">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Regensburg, Deutschland
+    </p>
+  </div>
+</section>
+
+<!-- ── MARQUEE BAND ── -->
+<div class="band">
+  <div class="band-inner">
+    <span class="band-item">Cybersecurity <span class="band-dot">✦</span></span>
+    <span class="band-item">Project Management <span class="band-dot">✦</span></span>
+    <span class="band-item">Python & SQL <span class="band-dot">✦</span></span>
+    <span class="band-item">Office 365 Admin <span class="band-dot">✦</span></span>
+    <span class="band-item">Consulting <span class="band-dot">✦</span></span>
+    <span class="band-item">Risk Management <span class="band-dot">✦</span></span>
+    <span class="band-item">Internationale Informatik <span class="band-dot">✦</span></span>
+    <span class="band-item">Leadership <span class="band-dot">✦</span></span>
+    <span class="band-item">Cybersecurity <span class="band-dot">✦</span></span>
+    <span class="band-item">Project Management <span class="band-dot">✦</span></span>
+    <span class="band-item">Python & SQL <span class="band-dot">✦</span></span>
+    <span class="band-item">Office 365 Admin <span class="band-dot">✦</span></span>
+    <span class="band-item">Consulting <span class="band-dot">✦</span></span>
+    <span class="band-item">Risk Management <span class="band-dot">✦</span></span>
+    <span class="band-item">Internationale Informatik <span class="band-dot">✦</span></span>
+    <span class="band-item">Leadership <span class="band-dot">✦</span></span>
+  </div>
+</div>
+
+<!-- ── EXPERIENCE ── -->
+<div class="section">
+  <p class="section-label">Berufserfahrung</p>
+  <h2 class="section-title">Was ich bisher<br>geleistet habe.</h2>
+
+  <div class="exp-grid">
+    <div class="exp-card">
+      <span class="exp-period">Mrz 2026 – aktuell</span>
+      <div>
+        <p class="exp-company">Syskron GmbH</p>
+        <h3 class="exp-role">Werkstudentin — Project Management Office</h3>
+        <ul class="exp-bullets">
+          <li>Unterstützung im PMO im digitalen Umfeld (Prozess- & Projektmanagement)</li>
+          <li>Datenbasierte Analyse und Reporting mit SQL</li>
+          <li>Mitarbeit an Digitalisierungs- und Prozessoptimierungsprojekten, Dokumentation und Stakeholder-Kommunikation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <span class="exp-period">Okt 2024 – aktuell</span>
+      <div>
+        <p class="exp-company">IntouchConsult e.V.</p>
+        <h3 class="exp-role">Junior Consultant & Head of IT</h3>
+        <ul class="exp-bullets">
+          <li>IT-Sicherheitsaudit auf Basis des C2M2-Rahmenwerks; Erstellung von Playbooks und Guidelines</li>
+          <li>Verwaltung der digitalen Infrastruktur via Office 365; Onboarding von Trainees</li>
+          <li>Leitung eines Trainee-Projekts zum Thema internationale Kommunikation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <span class="exp-period">Dez 2024 – Feb 2026</span>
+      <div>
+        <p class="exp-company">CipSoft GmbH</p>
+        <h3 class="exp-role">Customer Support</h3>
+        <ul class="exp-bullets">
+          <li>Zeitsensible Bearbeitung von standardisierten und technischen Support-Anfragen</li>
+          <li>Analyse und Bewertung eingehender In-Game Reports zur Identifizierung potenzieller Verstöße</li>
+          <li>Wissensmanagement durch Jira und Confluence</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <span class="exp-period">Dez 2023 – Jun 2024</span>
+      <div>
+        <p class="exp-company">Mister Spex SE</p>
+        <h3 class="exp-role">Sales Advisor</h3>
+        <ul class="exp-bullets">
+          <li>Kombination aus optischer Fachberatung und verkaufsorientierter Kundenkommunikation</li>
+          <li>Entwicklung passgenauer Stil- und Produktlösungen zur Steigerung der Kundenzufriedenheit</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── PHOTO STRIP (between experience & skills) ── -->
+<div class="photo-strip">
+  <div class="strip-frame">
+    <!-- <img src="foto1.jpg" alt="Foto 1"> -->
+    <div class="strip-placeholder">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      Foto 1<br><small>src="foto1.jpg"</small>
+    </div>
+  </div>
+  <div class="strip-frame">
+    <!-- <img src="foto2.jpg" alt="Foto 2"> -->
+    <div class="strip-placeholder">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      Foto 2<br><small>src="foto2.jpg"</small>
+    </div>
+  </div>
+  <div class="strip-frame">
+    <!-- <img src="foto3.jpg" alt="Foto 3"> -->
+    <div class="strip-placeholder">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      Foto 3<br><small>src="foto3.jpg"</small>
+    </div>
+  </div>
+</div>
+
+<!-- ── SKILLS ── -->
+<div class="skills-section">
+  <div class="skills-inner">
+    <p class="section-label">Kompetenzen</p>
+    <h2 class="section-title">Mein Werkzeugkasten.</h2>
+    <div class="skills-cloud">
+      <span class="skill-tag coral">Office 365 Administration</span>
+      <span class="skill-tag mint">Python</span>
+      <span class="skill-tag mint">SQL</span>
+      <span class="skill-tag mint">C</span>
+      <span class="skill-tag mint">Java</span>
+      <span class="skill-tag gold">IT-Sicherheitskonzepte</span>
+      <span class="skill-tag gold">Risk Management</span>
+      <span class="skill-tag coral">Prozessoptimierung</span>
+      <span class="skill-tag lav">Wissensmanagement</span>
+      <span class="skill-tag coral">Stakeholder-Kommunikation</span>
+      <span class="skill-tag lav">Teamfähigkeit</span>
+      <span class="skill-tag gold">CIA-Triad / NIST CSF</span>
+      <span class="skill-tag mint">Linux (Bash / CLI)</span>
+      <span class="skill-tag coral">SIEM / IDS / IPS</span>
+      <span class="skill-tag lav">Incident Response</span>
+      <span class="skill-tag gold">SOC Workflows</span>
+      <span class="skill-tag coral">Jira & Confluence</span>
+      <span class="skill-tag mint">CATIA V5</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── PHOTO ASIDE + ABOUT (between skills & education) ── -->
+<div class="photo-aside">
+  <div class="aside-frame">
+    <!-- <img src="foto4.jpg" alt="Foto 4"> -->
+    <div class="strip-placeholder">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      Foto 4<br><small>src="foto4.jpg"</small>
+    </div>
+  </div>
+  <div class="aside-text">
+    <p class="section-label" style="margin-bottom: 10px;">Über mich</p>
+    <p>Ich bin 23 Jahre alt und studiere <strong>Internationale Informatik</strong> an der OTH Regensburg. Neben meinem Studium bringe ich praktische Erfahrung aus Consulting, IT-Security und Projektmanagement mit.</p>
+    <br>
+    <p>Ich glaube daran, dass Technik am besten wirkt, wenn sie mit strategischem Denken kombiniert wird — deshalb suche ich Rollen, in denen beides gefragt ist.</p>
+  </div>
+</div>
+
+<!-- ── EDUCATION & CERTS ── -->
+<div class="section" style="padding-top: 40px;">
+  <p class="section-label">Bildung & Zertifikate</p>
+  <h2 class="section-title">Mein akademischer<br>Werdegang.</h2>
+
+  <div class="edu-grid">
+    <div class="edu-card c1">
+      <p class="edu-year">Okt 2024 — vrs. 2028</p>
+      <h3 class="edu-title">B.Sc. Internationale Informatik</h3>
+      <p class="edu-school">OTH Regensburg</p>
+      <div class="edu-grade">Ø 1,6</div>
+    </div>
+
+    <div class="edu-card c2">
+      <p class="edu-year">Sept 2021 — Jul 2022</p>
+      <h3 class="edu-title">Fachgebundene Hochschulreife</h3>
+      <p class="edu-school">FOS Aschaffenburg — Wirtschaft & Verwaltung</p>
+      <div class="edu-grade">Ø 1,8</div>
+    </div>
+
+    <div class="edu-card c3">
+      <p class="edu-year">Januar 2026</p>
+      <h3 class="edu-title">Google Cybersecurity Professional Certificate</h3>
+      <p class="edu-school">Google / Coursera</p>
+      <ul class="cert-bullets">
+        <li>Zentrale Sicherheitsprinzipien: CIA-Triad, SIEM, IDS/IPS, Incident Response, OWASP, NIST CSF</li>
+        <li>Risk Management: Bedrohungen, Schwachstellen, Audits, Business Continuity</li>
+        <li>Netzwerkgrundlagen: TCP/IP, OSI, Packet Analysis & Monitoring</li>
+        <li>Praktisch: Linux (Bash), SQL, Python in virtuellen Laborumgebungen</li>
+        <li>SOC Workflows: Log-Analyse, Alert-Triage, Dokumentation & Reporting</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ── LANGUAGES & VOLUNTEERING ── -->
+<div class="section" style="padding-top: 0;">
+  <div class="extras-grid">
+    <div>
+      <p class="section-label">Sprachen</p>
+      <h2 class="section-title" style="font-size: 32px; margin-bottom: 32px;">Wie ich kommuniziere.</h2>
+      <ul class="lang-list">
+        <li class="lang-item">
+          <span>Deutsch</span>
+          <div class="lang-level">
+            <div class="lang-dot filled"></div><div class="lang-dot filled"></div>
+            <div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div>
+          </div>
+        </li>
+        <li class="lang-item">
+          <span>Englisch — B2+</span>
+          <div class="lang-level">
+            <div class="lang-dot filled"></div><div class="lang-dot filled"></div>
+            <div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot"></div>
+          </div>
+        </li>
+        <li class="lang-item">
+          <span>Spanisch — A2+</span>
+          <div class="lang-level">
+            <div class="lang-dot filled"></div><div class="lang-dot filled"></div>
+            <div class="lang-dot"></div><div class="lang-dot"></div><div class="lang-dot"></div>
+          </div>
+        </li>
+        <li class="lang-item">
+          <span>Russisch — A1</span>
+          <div class="lang-level">
+            <div class="lang-dot filled"></div><div class="lang-dot"></div>
+            <div class="lang-dot"></div><div class="lang-dot"></div><div class="lang-dot"></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="section-label">Ehrenamt & Hobbys</p>
+      <h2 class="section-title" style="font-size: 32px; margin-bottom: 32px;">Wer ich bin.</h2>
+
+      <div class="vol-card">
+        <h3 class="vol-title">Formula Student Dynamics e.V.</h3>
+        <p class="vol-period">Okt 2023 – März 2024 · Aerodynamik-Team</p>
+        <p class="vol-desc">Erstellung komplexer 2D-Profile und Digital Mockups mit CATIA V5 zur Optimierung der Fahrzeugaerodynamik; Sponsorenakquise und Vereinsmitgestaltung.</p>
+      </div>
+
+      <div class="vol-card">
+        <h3 class="vol-title">Radio Darmstadt — Radio Host</h3>
+        <p class="vol-period">Okt 2022 – Okt 2024</p>
+        <p class="vol-desc">Planung, Vorproduktion und Live-Moderation von Sendungen mit einer durchschnittlichen Reichweite von 10.000 Zuhörern; Audioproduktion mit Audacity.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  Made with <span>♥</span> · Arina Roth · 2025
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), entry.target.dataset.delay || 0);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.exp-card, .edu-card, .skill-tag').forEach((el, i) => {
+    el.dataset.delay = i * 60;
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
