@@ -275,7 +275,8 @@
   /* ── PHOTO STRIP ── */
   .photo-strip {
     background: white; padding: 56px 80px;
-    display: flex; gap: 24px; align-items: flex-end; overflow: hidden;
+    display: flex; gap: 24px; align-items: flex-end;
+    justify-content: center; overflow: hidden;
   }
 
   .strip-frame {
@@ -288,7 +289,7 @@
   .strip-frame:hover { transform: translateY(-8px); box-shadow: 0 20px 48px rgba(0,0,0,0.14); }
   .strip-frame:nth-child(1) { width: 300px; height: 340px; border-color: var(--coral); }
   .strip-frame:nth-child(2) { width: 220px; height: 260px; border-color: var(--mint); margin-bottom: 40px; }
-  .strip-frame:nth-child(3) { width: 260px; height: 310px; border-color: var(--lavender); margin-bottom: 10px; }
+  .strip-frame:nth-child(3) { width: 260px; height: 310px; border-color: var(--lavender); }
 
   .strip-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
@@ -300,7 +301,7 @@
   }
 
   .strip-placeholder svg { width: 28px; height: 28px; opacity: .35; }
-
+  
   /* ── SKILLS ── */
   .skills-section { background: var(--navy); padding: 100px 80px; }
   .skills-inner { max-width: 1200px; margin: 0 auto; }
